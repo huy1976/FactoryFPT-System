@@ -1,0 +1,52 @@
+version: '3.8'
+
+services:
+  # 1. SQL Server Database
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: factoryfpt-sql
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_SA_PASSWORD: "YourStrong(!)Password"
+    ports:
+      - "1433:1433"
+    volumes:
+      - sql_data:/var/opt/mssql
+    networks:
+      - factoryfpt-network
+
+  # 2. Backend API (.NET 8)
+  api:
+    build:
+      context: ./FactoryFPT_Backend
+      dockerfile: Dockerfile
+    container_name: factoryfpt-api
+    environment:
+      - ConnectionStrings__Default=Server=sqlserver,1433;Database=FactoryFPTDb;User Id=sa;Password=YourStrong(!)Password;TrustServerCertificate=True;
+      - ASPNETCORE_ENVIRONMENT=Development
+    ports:
+      - "5000:8080"
+    depends_on:
+      - sqlserver
+    networks:
+      - factoryfpt-network
+
+  # 3. Frontend (React Dashboard)
+  frontend:
+    build:
+      context: ./FactoryFPT_Frontend
+      dockerfile: Dockerfile
+    container_name: factoryfpt-frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      - api
+    networks:
+      - factoryfpt-network
+
+volumes:
+  sql_data:
+
+networks:
+  factoryfpt-network:
+    driver: bridge

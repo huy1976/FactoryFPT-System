@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FactoryFPT Dashboard</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/8.0.7/signalr.min.js"></script>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 24px;
+            background-color: #f5f6f8;
+            color: #333;
+        }
+
+        h1 {
+            margin-bottom: 24px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+
+        .card {
+            background: white;
+            padding: 18px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            margin-bottom: 16px;
+        }
+
+            .card p {
+                font-size: 1.4rem;
+                font-weight: bold;
+                margin: 8px 0 0 0;
+            }
+
+        canvas {
+            background: white;
+            padding: 10px;
+            width: 100% !important;
+            max-height: 350px;
+        }
+
+        pre {
+            background: #222;
+            color: #00ff66;
+            padding: 12px;
+            border-radius: 8px;
+            max-height: 150px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+            font-family: monospace;
+        }
+
+        .ok {
+            color: #2e7d32;
+        }
+
+        .warn {
+            color: #b36b00;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>FactoryFPT — Sensor Dashboard</h1>
+
+    <div class="grid">
+        <div class="card">
+            <b>Device</b>
+            <p id="device">D001</p>
+        </div>
+        <div class="card">
+            <b>Status</b>
+            <p id="status">Idle</p>
+        </div>
+        <div class="card">
+            <b>Last Force</b>
+            <p id="force">-</p>
+        </div>
+    </div>
+    <div class="card">
+        <h3>Force vs Time</h3>
+        <canvas id="forceChart"></canvas>
+    </div>
+
+    <div class="card">
+        <h3>Angle vs Time</h3>
+        <canvas id="angleChart"></canvas>
+    </div>
+
+    <div class="card">
+        <h3>Alerts Logs</h3>
+        <pre id="alerts">Waiting for events...</pre>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

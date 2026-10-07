@@ -1,0 +1,1 @@
+Run npm install. chartjs-adapter-date-fns is required by TelemetryChart.
