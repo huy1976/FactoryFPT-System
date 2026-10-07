@@ -30,4 +30,6 @@ Toàn bộ hệ thống (SQL Server, Backend API, Frontend Dashboard) đã đư�
 Mở Terminal / PowerShell tại thư mục gốc của dự án và dán lệnh:
 
 ```bash
-docker compose up --build -d
+docker compose up --build -d 
+
+### Bước
